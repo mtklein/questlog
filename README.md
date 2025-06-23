@@ -1,9 +1,9 @@
 # QuestLog
 
-QuestLog is a lightweight journal for real-world adventures. It blends a list of quests with an interactive map so you can explore with a sense of purpose.
+QuestLog is a lightweight journal for real-world adventures. This repository hosts a proof-of-concept implemented as a single HTML file. The page stores quests locally and blends a quest list with an interactive map so you can explore with a sense of purpose directly in the browser.
 
 ## MVP Goals
-- **Quest Journal**: Create quests, edit their steps and check them off. Quests persist locally in a JSON file.
+- **Quest Journal**: Create quests, edit their steps and check them off. Quests persist locally in the browser using `localStorage`.
 - **Interactive Map**: View quest locations on a map.
 - **Navigation and Routing**: Quests can define routes and waypoints so you can follow them on the map.
 - **User Customization**: Define major and minor locations to keep the map focused and meaningful.
