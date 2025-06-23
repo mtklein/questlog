@@ -20,8 +20,12 @@
 - Rendered map markers for quest steps using Leaflet inside the WebView.
 - Handled unsupported platforms by showing a placeholder when WebView isn't available.
 - Configured the WebView platform on macOS and iOS so the map loads correctly.
+- Created a minimal SwiftUI version of the app for iOS and macOS.
+- Simplified the README to focus on features and note that Android support is optional.
 
 
 ## Next Steps
 - Expand tests and refactor UI code as features grow.
 - Explore on-device AI for quest suggestions.
+- Reassess the technology stack: evaluate whether a native SwiftUI approach
+  for iOS and macOS would offer advantages over Flutter.
