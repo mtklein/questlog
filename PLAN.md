@@ -27,6 +27,7 @@
 - **Migrated entirely to SwiftUI**: removed the Flutter demo and promoted the Swift package to the repository root.
 - **Ported features**: quest editing, JSON persistence and map markers are now implemented with SwiftUI and MapKit.
 - **Updated documentation**: README explains running the SwiftUI app and no longer mentions Flutter.
+- Renamed package and files to drop the "SwiftUI" suffix and simplified the quest list to compile cleanly.
 
 ## Next Steps
 - Expand tests and refactor UI code as features grow.

@@ -2,18 +2,18 @@
 import PackageDescription
 
 let package = Package(
-    name: "QuestLogSwiftUI",
+    name: "QuestLog",
     platforms: [
         .iOS(.v15),
         .macOS(.v12)
     ],
     products: [
-        .executable(name: "QuestLogSwiftUI", targets: ["QuestLogSwiftUI"])
+        .executable(name: "QuestLog", targets: ["QuestLog"])
     ],
     targets: [
         .executableTarget(
-            name: "QuestLogSwiftUI",
-            path: "QuestLogSwiftUI"
+            name: "QuestLog",
+            path: "QuestLog"
         )
     ]
 )

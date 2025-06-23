@@ -12,7 +12,8 @@ struct QuestListView: View {
                     let quest = store.quests[index]
                     Section(header: header(for: quest, index: index)) {
                         ForEach(quest.steps.indices, id: .self) { stepIndex in
-                            Toggle(store.quests[index].steps[stepIndex].name, isOn: stepBinding(stepIndex, index))
+                            let step = quest.steps[stepIndex]
+                            Toggle(step.name, isOn: stepBinding(stepIndex, index))
                         }
                         .onDelete { offsets in
                             store.quests[index].steps.remove(atOffsets: offsets)

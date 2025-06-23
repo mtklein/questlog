@@ -23,7 +23,7 @@ QuestLog borrows the vocabulary of RPGs without turning life into a game. The go
 We do not yet have design assets or wireframes, so interface decisions rely on best judgement. The code is released under the MIT License.
 
 ## Development
-Open `Package.swift` in Xcode. Xcode will generate a project for the SwiftUI app automatically. Build and run on macOS or an iOS simulator. Quest data is saved to `quests.json` in your documents folder.
+Open `Package.swift` in Xcode. Xcode will generate a project automatically. Build and run on macOS or an iOS simulator. Quest data is saved to `quests.json` in your documents folder.
 
 ## Running on macOS
 1. Install Xcode from the Mac App Store.

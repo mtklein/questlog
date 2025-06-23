@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct QuestLogSwiftUIApp: App {
+struct QuestLogApp: App {
     @StateObject private var store = QuestStore()
 
     var body: some Scene {
