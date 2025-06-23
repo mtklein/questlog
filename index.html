@@ -13,8 +13,12 @@ nav button { flex: 1; border: none; background: #f4f4f4; }
 .hidden { display: none; }
 #journal ul { list-style: none; padding: 0; }
 #journal li { padding: 5px 10px; }
+#journal li button { margin-left: 5px; }
+.step-list { list-style: none; padding-left: 20px; }
 .completed { text-decoration: line-through; color: #777; }
+#mapView { position: relative; }
 #map { height: 100%; }
+#fog { position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none; }
 </style>
 </head>
 <body>
@@ -35,6 +39,7 @@ nav button { flex: 1; border: none; background: #f4f4f4; }
 </section>
 <section id="mapView" class="hidden">
 <div id="map"></div>
+<canvas id="fog"></canvas>
 </section>
 </div>
 <nav>
@@ -47,32 +52,73 @@ const journalEl = document.getElementById('journal');
 const mapEl = document.getElementById('mapView');
 const listEl = document.getElementById('questList');
 const form = document.getElementById('addForm');
-let map, markers = [];
+let map, markers = [], polylines = [];
+const fogCanvas = document.getElementById('fog');
+const fogCtx = fogCanvas.getContext('2d');
+let visited = [], currentPos = null;
 
 function saveQuests(quests){
   localStorage.setItem('quests', JSON.stringify(quests));
 }
 
 function loadQuests(){
-  return JSON.parse(localStorage.getItem('quests')||'[]');
+  const qs = JSON.parse(localStorage.getItem('quests')||'[]');
+  qs.forEach(q=>{ if(!q.steps) q.steps=[]; });
+  return qs;
 }
 
 function render(){
   listEl.innerHTML='';
   markers.forEach(m=>m.remove());
   markers=[];
+  polylines.forEach(p=>p.remove());
+  polylines=[];
   const quests = loadQuests();
   quests.forEach((q,i)=>{
     const li=document.createElement('li');
-    li.textContent=q.text;
-    if(q.done) li.classList.add('completed');
-    li.onclick=()=>{
-      q.done=!q.done;
-      saveQuests(quests);
-      render();
+    const text=document.createElement('span');
+    text.textContent=q.text;
+    if(q.done) text.classList.add('completed');
+    text.onclick=()=>{ q.done=!q.done; saveQuests(quests); render(); };
+    li.appendChild(text);
+    const editBtn=document.createElement('button');
+    editBtn.textContent='Edit';
+    editBtn.onclick=()=>{
+      const nt=prompt('Quest text', q.text);
+      if(nt!==null){ q.text=nt; saveQuests(quests); render(); }
     };
+    li.appendChild(editBtn);
+    const addStepBtn=document.createElement('button');
+    addStepBtn.textContent='Add Step';
+    addStepBtn.onclick=()=>{
+      const st=prompt('Step text');
+      if(!st) return;
+      const lat=parseFloat(prompt('Step Lat')||'');
+      const lng=parseFloat(prompt('Step Lng')||'');
+      q.steps.push({text:st,lat:lat,lng:lng,done:false});
+      saveQuests(quests); render();
+    };
+    li.appendChild(addStepBtn);
+    const stepList=document.createElement('ul');
+    stepList.className='step-list';
+    q.steps.forEach((s)=>{
+      const sLi=document.createElement('li');
+      const sText=document.createElement('span');
+      sText.textContent=s.text;
+      if(s.done) sText.classList.add('completed');
+      sText.onclick=()=>{ s.done=!s.done; saveQuests(quests); render(); };
+      sLi.appendChild(sText);
+      stepList.appendChild(sLi);
+      if(!isNaN(s.lat) && !isNaN(s.lng)){
+        const marker=L.marker([s.lat,s.lng]).addTo(map).bindPopup(s.text);
+        markers.push(marker);
+      }
+    });
+    li.appendChild(stepList);
     listEl.appendChild(li);
-    if(q.lat && q.lng){
+
+    let path=[];
+    if(!isNaN(q.lat) && !isNaN(q.lng)){
       const icon = L.icon({
         iconUrl: q.type==='major' ? 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png'
                                   : 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -80,13 +126,19 @@ function render(){
       });
       const marker=L.marker([q.lat,q.lng],{icon}).addTo(map).bindPopup(q.text);
       markers.push(marker);
+      path.push([q.lat,q.lng]);
+    }
+    q.steps.forEach(s=>{ if(!isNaN(s.lat) && !isNaN(s.lng)) path.push([s.lat,s.lng]); });
+    if(path.length>1){
+      const poly=L.polyline(path,{color:'blue'}).addTo(map);
+      polylines.push(poly);
     }
   });
 }
 
 form.onsubmit=e=>{
   e.preventDefault();
-  const q={text:questText.value, lat:parseFloat(questLat.value), lng:parseFloat(questLng.value), type:questType.value};
+  const q={text:questText.value, lat:parseFloat(questLat.value), lng:parseFloat(questLng.value), type:questType.value, done:false, steps:[]};
   const quests=loadQuests();
   quests.push(q);
   saveQuests(quests);
@@ -109,7 +161,37 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
 }).addTo(map);
 
+function updateFog(){
+  const size=map.getSize();
+  fogCanvas.width=size.x;
+  fogCanvas.height=size.y;
+  fogCtx.fillStyle='rgba(0,0,0,0.6)';
+  fogCtx.fillRect(0,0,size.x,size.y);
+  fogCtx.globalCompositeOperation='destination-out';
+  visited.forEach(v=>{
+    const p=map.latLngToContainerPoint(v);
+    fogCtx.beginPath();
+    fogCtx.arc(p.x,p.y,50,0,Math.PI*2);
+    fogCtx.fill();
+  });
+  fogCtx.globalCompositeOperation='source-over';
+}
+
+function addVisited(latlng){
+  visited.push(L.latLng(latlng));
+  updateFog();
+}
+
+navigator.geolocation && navigator.geolocation.watchPosition(pos=>{
+  currentPos=[pos.coords.latitude,pos.coords.longitude];
+  map.setView(currentPos,15);
+  addVisited(currentPos);
+});
+
+map.on('moveend zoomend',updateFog);
+
 render();
+updateFog();
 </script>
 </body>
 </html>
