@@ -5,7 +5,7 @@ QuestLog is a mobile application inspired by role-playing games. It blends a jou
 Quests consist of a quest with a list of steps beneath it, keeping the hierarchy simple.
 
 ## MVP Goals
-- **Quest Journal**: Track ongoing and completed quests in a concise format. Each quest lists its steps and you can check them off.
+ - **Quest Journal**: Create quests, edit their steps, and check them off. All quests persist locally in a JSON file.
 - **Interactive Map**: A dedicated tab will show an interactive map with markers for quest locations.
 - **Navigation and Routing**: Quests can define routes and waypoints so you can follow them on the map.
 - **User Customization**: Define major and minor locations to keep the map focused and meaningful.

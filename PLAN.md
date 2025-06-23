@@ -14,6 +14,10 @@
 - Documented how to run the app on macOS and iPhone.
 - Documented that `flutter create --platforms=macos,linux,windows .` generates
   desktop platform folders and added the command to the setup script.
+- Implemented quest editing: users can add, edit, and delete quests and steps.
+- Added ability to choose the active quest and display its steps on the map.
+- Stored quests in a local JSON file for rudimentary persistence.
+- Rendered map markers for quest steps using Leaflet inside the WebView.
 
 
 ## Next Steps
