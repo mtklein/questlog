@@ -4,6 +4,8 @@ Open `index.html` in a modern browser to try it out.
 
 QuestLog is a lightweight journal for real-world adventures. This repository hosts a proof-of-concept implemented as a single HTML file. The page stores quests locally and blends a quest list with an interactive map so you can explore with a sense of purpose directly in the browser.
 
+The demo includes a few quests around **Taipei** to showcase how locations and steps appear on the map. Feel free to delete them or add your own.
+
 ## MVP Goals
 - **Quest Journal**: Create quests, add nested steps and edit them. All progress persists locally using `localStorage`.
 - **Interactive Map**: View quest locations on a map with a simple fog of war effect.

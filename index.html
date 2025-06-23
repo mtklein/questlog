@@ -62,8 +62,21 @@ function saveQuests(quests){
 }
 
 function loadQuests(){
-  const qs = JSON.parse(localStorage.getItem('quests')||'[]');
-  qs.forEach(q=>{ if(!q.steps) q.steps=[]; });
+  let qs = JSON.parse(localStorage.getItem('quests')||'null');
+  if(!qs){
+    qs=[
+      {text:'Visit Taipei 101 observation deck',lat:25.033968,lng:121.564468,type:'major',done:false,steps:[
+        {text:'Check out the food court',lat:25.033968,lng:121.565,done:false}
+      ]},
+      {text:'Stroll through Daan Forest Park',lat:25.032963,lng:121.535379,type:'minor',done:false,steps:[]},
+      {text:'Explore the Shilin Night Market',lat:25.087113,lng:121.525, type:'major',done:false,steps:[
+        {text:'Try the famous street food',lat:25.087113,lng:121.525,done:false}
+      ]}
+    ];
+    saveQuests(qs);
+  } else {
+    qs.forEach(q=>{ if(!q.steps) q.steps=[]; });
+  }
   return qs;
 }
 
