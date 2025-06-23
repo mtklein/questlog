@@ -2,10 +2,12 @@
 
 ## Completed
 - Added initial documentation files based on the project kickoff conversation.
-- Clarified requirements: two-level quest hierarchy, free map providers, no design assets, MIT license.
+- Clarified requirements: one-level quest hierarchy, free map providers, no design assets, MIT license.
+- Created minimal Flutter project with basic quest journal UI and tests.
+- Added a setup script to install Flutter for local development.
+
 
 ## Next Steps
-- Decide on overall app architecture using Flutter.
-- Experiment with Google Maps and Mapbox for mapping without committing to either.
-- Set up testing framework with Flutter and create initial tests.
-- Implement basic quest model (Quest with Steps) and journal UI.
+- Integrate an interactive map using a free provider.
+- Expand tests and refactor UI code as features grow.
+- Explore on-device AI for quest suggestions.
