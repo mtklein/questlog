@@ -2,10 +2,10 @@
 
 QuestLog is a mobile application inspired by role-playing games. It blends a journal of quests with an interactive map to help users explore the real world with a sense of adventure.
 
-Quests currently have two levels: a high-level quest with a list of steps beneath it. This keeps things simple while still letting users break goals into meaningful tasks.
+Quests consist of a quest with a list of steps beneath it, keeping the hierarchy simple.
 
 ## MVP Goals
-- **Quest Journal**: Track ongoing and completed quests in a concise format. Support main quests and sub-quests.
+- **Quest Journal**: Track ongoing and completed quests in a concise format. Each quest lists its steps.
 - **Interactive Map**: Display markers for significant locations such as shops, rest points, or user-defined points of interest. Markers link back to quests in the journal.
 - **Navigation and Routing**: Allow quests to include routes and waypoints so users can follow them on the map.
 - **User Customization**: Let users define major and minor locations to keep the map focused and meaningful.
