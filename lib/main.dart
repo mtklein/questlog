@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:io';
 import 'models/quest.dart';
 import 'quest_editor.dart';
 import 'storage.dart';
@@ -241,7 +243,9 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  late final WebViewController _controller;
+  WebViewController? _controller;
+  bool get _available =>
+      !kIsWeb && (Platform.isAndroid || Platform.isIOS || Platform.isMacOS);
 
   String _htmlForQuest(Quest quest) {
     final stepsWithLoc =
@@ -278,28 +282,36 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted);
-    if (widget.activeQuest != null) {
-      _controller.loadHtmlString(_htmlForQuest(widget.activeQuest!));
-    } else {
-      _controller.loadRequest(Uri.parse('https://www.openstreetmap.org'));
+    if (_available) {
+      _controller = WebViewController()
+        ..setJavaScriptMode(JavaScriptMode.unrestricted);
+      if (widget.activeQuest != null) {
+        _controller!.loadHtmlString(_htmlForQuest(widget.activeQuest!));
+      } else {
+        _controller!.loadRequest(Uri.parse('https://www.openstreetmap.org'));
+      }
     }
   }
 
   @override
   void didUpdateWidget(covariant MapScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.activeQuest != oldWidget.activeQuest &&
+    if (_available &&
+        widget.activeQuest != oldWidget.activeQuest &&
         widget.activeQuest != null) {
-      _controller.loadHtmlString(_htmlForQuest(widget.activeQuest!));
+      _controller!.loadHtmlString(_htmlForQuest(widget.activeQuest!));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!_available) {
+      return const Scaffold(
+        body: Center(child: Text('Map view not supported on this platform')),
+      );
+    }
     return Scaffold(
-      body: WebViewWidget(controller: _controller),
+      body: WebViewWidget(controller: _controller!),
     );
   }
 }

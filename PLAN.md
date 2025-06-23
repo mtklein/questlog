@@ -18,6 +18,7 @@
 - Added ability to choose the active quest and display its steps on the map.
 - Stored quests in a local JSON file for rudimentary persistence.
 - Rendered map markers for quest steps using Leaflet inside the WebView.
+- Handled unsupported platforms by showing a placeholder when WebView isn't available.
 
 
 ## Next Steps
