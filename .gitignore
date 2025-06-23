@@ -1,20 +1,13 @@
-# Flutter/Dart/Pub related
-.dart_tool/
-.packages
-.pub/
-build/
-android/
-ios/
-macos/
-windows/
-linux/
-.flutter-plugins
-.flutter-plugins-dependencies
-.metadata
-analysis_options.yaml
-pubspec.lock
-*.iml
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+DerivedData/
+xcuserdata/
 
-# Other files
+# macOS files
+.DS_Store
+
+# Editor directories
 .idea/
 .vscode/

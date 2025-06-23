@@ -1,38 +1,32 @@
 # QuestLog
 
-QuestLog is a mobile application inspired by role-playing games. It blends a journal of quests with an interactive map to help users explore the real world with a sense of adventure.
+QuestLog is a lightweight journal for real-world adventures. It blends a list of quests with an interactive map so you can explore with a sense of purpose.
 
-Quests consist of a quest with a list of steps beneath it, keeping the hierarchy simple.
+Quests consist of a quest and a list of steps beneath it. The app targets iOS and macOS; Android is a nice-to-have but not required.
 
 ## MVP Goals
- - **Quest Journal**: Create quests, edit their steps, and check them off. All quests persist locally in a JSON file.
- - **Interactive Map**: A dedicated tab will show an interactive map with markers for quest locations. On unsupported platforms a placeholder message is shown.
+- **Quest Journal**: Create quests, edit their steps and check them off. Quests persist locally in a JSON file.
+- **Interactive Map**: View quest locations on a map using MapKit.
 - **Navigation and Routing**: Quests can define routes and waypoints so you can follow them on the map.
 - **User Customization**: Define major and minor locations to keep the map focused and meaningful.
 - **Simple Navigation**: A bottom navigation bar lets you switch between the journal and the map.
 
 ## Future Features
-- **Compass Integration**: Use features like iOS Dynamic Island or Android foreground services for persistent guidance.
+- **Compass Integration**: Use features like iOS Dynamic Island for persistent guidance.
 - **Meaningful Feedback**: Provide haptic vibrations and sounds when discovering important locations.
-- **On‑Device AI**: Employ Core ML on iOS and TensorFlow Lite on Android for personalized suggestions and natural language quest creation.
+- **On‑Device AI**: Employ Core ML for personalized suggestions and natural language quest creation.
 - **Optional Objectives**: Support optional or side quests to make journeys feel layered without adding competitive gamification.
-
-## Tech Stack
-QuestLog will be built with **Flutter** so the same codebase runs on both iOS and Android. The interactive map currently loads OpenStreetMap in a WebView using the `webview_flutter` package. This map works on Android, iOS, and macOS; other platforms show a placeholder.
-On macOS the app sets `WebViewPlatform.instance` to `WebKitWebViewPlatform()` from `webview_flutter_wkwebview` so the map renders correctly. The app relies on free services and may integrate with on-device AI models or online services such as OpenAI if needed.
 
 ## Philosophy
 QuestLog borrows the vocabulary of RPGs without turning life into a game. The goal is to encourage daily adventure and progress in real life, not to chase points or achievements.
 
 We do not yet have design assets or wireframes, so interface decisions rely on best judgement. The code is released under the MIT License.
 
-## Development Setup
-Run `source ./deps.sh` on Linux or macOS to install Flutter locally, download artifacts, and fetch Dart packages. The script also configures Git to trust the Flutter directory so `flutter test` works without warnings. After sourcing the script you can run `flutter test` and `flutter run` offline.
-If you want to build for desktop platforms, run `flutter create --platforms=macos,linux,windows .` once to generate the platform directories.
+## Development
+Open `Package.swift` in Xcode. Xcode will generate a project automatically. Build and run on macOS or an iOS simulator. Quest data is saved to `quests.json` in your documents folder.
+If you are building from the command line, run `./deps.sh` to check for a Swift toolchain.
 
-### Running on macOS
-Use `flutter run -d macos` to launch the desktop build.
-
-### Running on iPhone
-Connect a device or start the iOS simulator and run `flutter run -d ios`. The first launch may require Xcode to set up signing.
-
+## Running on macOS
+1. Install Xcode from the Mac App Store.
+2. Open `Package.swift` in Xcode.
+3. Choose "My Mac" or an iOS simulator and press **Run**.
