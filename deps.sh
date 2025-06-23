@@ -21,3 +21,5 @@ fi
 export PATH="$DEST/bin:$PATH"
 git config --global --add safe.directory "$DEST"
 flutter --version
+flutter precache
+(cd "$(dirname "$0")" && flutter pub get)

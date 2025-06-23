@@ -25,5 +25,5 @@ QuestLog borrows the vocabulary of RPGs without turning life into a game. The go
 We do not yet have design assets or wireframes, so interface decisions rely on best judgement. The code is released under the MIT License.
 
 ## Development Setup
-Run `source ./deps.sh` on Linux or macOS to install Flutter locally and update your `PATH`. The script also configures Git to trust the Flutter directory so `flutter test` works without warnings. Then use `flutter test` and `flutter run` to build the demo app.
+Run `source ./deps.sh` on Linux or macOS to install Flutter locally, download artifacts, and fetch Dart packages. The script also configures Git to trust the Flutter directory so `flutter test` works without warnings. After sourcing the script you can run `flutter test` and `flutter run` offline.
 
