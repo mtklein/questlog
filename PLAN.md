@@ -10,12 +10,12 @@
 - Pre-caches Flutter artifacts and runs `flutter pub get` so tests pass offline.
 - Fixed compilation errors in `main.dart` so the widget test runs successfully.
 - Added a bottom navigation bar with a map tab placeholder.
+- Connected the map tab to OpenStreetMap using a WebView.
 - Documented how to run the app on macOS and iPhone.
 - Documented that `flutter create --platforms=macos,linux,windows .` generates
   desktop platform folders and added the command to the setup script.
 
 
 ## Next Steps
-- Connect the placeholder map to a real provider.
 - Expand tests and refactor UI code as features grow.
 - Explore on-device AI for quest suggestions.
