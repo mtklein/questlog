@@ -11,6 +11,8 @@
 - Fixed compilation errors in `main.dart` so the widget test runs successfully.
 - Added a bottom navigation bar with a map tab placeholder.
 - Documented how to run the app on macOS and iPhone.
+- Documented that `flutter create --platforms=macos,linux,windows .` generates
+  desktop platform folders and added the command to the setup script.
 
 
 ## Next Steps

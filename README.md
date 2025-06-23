@@ -27,6 +27,7 @@ We do not yet have design assets or wireframes, so interface decisions rely on b
 
 ## Development Setup
 Run `source ./deps.sh` on Linux or macOS to install Flutter locally, download artifacts, and fetch Dart packages. The script also configures Git to trust the Flutter directory so `flutter test` works without warnings. After sourcing the script you can run `flutter test` and `flutter run` offline.
+If you want to build for desktop platforms, run `flutter create --platforms=macos,linux,windows .` once to generate the platform directories.
 
 ### Running on macOS
 Use `flutter run -d macos` to launch the desktop build.
