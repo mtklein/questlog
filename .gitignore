@@ -3,6 +3,15 @@
 .packages
 .pub/
 build/
+android/
+ios/
+macos/
+windows/
+linux/
+.metadata
+analysis_options.yaml
+pubspec.lock
+*.iml
 
 # Other files
 .idea/

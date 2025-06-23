@@ -5,10 +5,11 @@ QuestLog is a mobile application inspired by role-playing games. It blends a jou
 Quests consist of a quest with a list of steps beneath it, keeping the hierarchy simple.
 
 ## MVP Goals
-- **Quest Journal**: Track ongoing and completed quests in a concise format. Each quest lists its steps.
-- **Interactive Map**: Display markers for significant locations such as shops, rest points, or user-defined points of interest. Markers link back to quests in the journal.
-- **Navigation and Routing**: Allow quests to include routes and waypoints so users can follow them on the map.
-- **User Customization**: Let users define major and minor locations to keep the map focused and meaningful.
+- **Quest Journal**: Track ongoing and completed quests in a concise format. Each quest lists its steps and you can check them off.
+- **Interactive Map**: A dedicated tab will show an interactive map with markers for quest locations.
+- **Navigation and Routing**: Quests can define routes and waypoints so you can follow them on the map.
+- **User Customization**: Define major and minor locations to keep the map focused and meaningful.
+- **Simple Navigation**: A bottom navigation bar lets you switch between the journal and the map.
 
 ## Future Features
 - **Compass Integration**: Use features like iOS Dynamic Island or Android foreground services for persistent guidance.
@@ -26,4 +27,11 @@ We do not yet have design assets or wireframes, so interface decisions rely on b
 
 ## Development Setup
 Run `source ./deps.sh` on Linux or macOS to install Flutter locally, download artifacts, and fetch Dart packages. The script also configures Git to trust the Flutter directory so `flutter test` works without warnings. After sourcing the script you can run `flutter test` and `flutter run` offline.
+If you want to build for desktop platforms, run `flutter create --platforms=macos,linux,windows .` once to generate the platform directories.
+
+### Running on macOS
+Use `flutter run -d macos` to launch the desktop build.
+
+### Running on iPhone
+Connect a device or start the iOS simulator and run `flutter run -d ios`. The first launch may require Xcode to set up signing.
 

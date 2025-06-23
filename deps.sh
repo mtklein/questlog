@@ -22,4 +22,8 @@ export PATH="$DEST/bin:$PATH"
 git config --global --add safe.directory "$DEST"
 flutter --version
 flutter precache
-(cd "$(dirname "$0")" && flutter pub get)
+PROJECT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+if [ ! -d "$PROJECT_ROOT/macos" ]; then
+  flutter create --platforms=macos,linux,windows "$PROJECT_ROOT"
+fi
+(cd "$PROJECT_ROOT" && flutter pub get)
