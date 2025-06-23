@@ -32,4 +32,4 @@ Run `source ./deps.sh` to fetch dependencies and run tests. A native version imp
 1. Install Xcode from the Mac App Store.
 2. Run `source ./deps.sh` to set up Flutter.
 3. Launch the app with `flutter run -d macos`.
-4. To try the SwiftUI sample, open the `swiftui` folder in Xcode and press Run.
+4. To try the SwiftUI sample, open `swiftui/Package.swift` in Xcode and press Run.

@@ -23,6 +23,7 @@
 - Created a minimal SwiftUI version of the app for iOS and macOS.
 - Simplified the README to focus on features and note that Android support is optional.
 - Added instructions in README for running the app on macOS.
+- Added a Swift Package manifest so Xcode opens the SwiftUI sample without creating a project manually.
 
 
 ## Next Steps
