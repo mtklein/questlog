@@ -6,6 +6,7 @@
 - Created minimal Flutter project with basic quest journal UI and tests.
 - Added a setup script to install Flutter for local development.
 - Updated setup script for Linux and macOS environments.
+- Configured Git to trust the installed Flutter directory to avoid dubious ownership warnings.
 
 
 ## Next Steps

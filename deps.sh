@@ -19,4 +19,5 @@ if [ ! -d "$DEST" ]; then
 fi
 
 export PATH="$DEST/bin:$PATH"
+git config --global --add safe.directory "$DEST"
 flutter --version
