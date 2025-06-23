@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'models/quest.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 void main() => runApp(const QuestLogApp());
 
@@ -26,15 +27,21 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _index = 0;
 
-  final List<Widget> _pages = [
-    QuestListScreen(),
-    MapScreen(),
-  ];
+  Widget _pageForIndex(int index) {
+    switch (index) {
+      case 0:
+        return QuestListScreen();
+      case 1:
+        return const MapScreen();
+      default:
+        return Container();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_index],
+      body: _pageForIndex(_index),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _index,
         onTap: (i) => setState(() => _index = i),
@@ -105,13 +112,28 @@ class _QuestWidgetState extends State<QuestWidget> {
   }
 }
 
-class MapScreen extends StatelessWidget {
+class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
 
   @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  late final WebViewController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse('https://www.openstreetmap.org'));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Map placeholder'),
+    return Scaffold(
+      body: WebViewWidget(controller: _controller),
     );
   }
 }

@@ -18,7 +18,7 @@ Quests consist of a quest with a list of steps beneath it, keeping the hierarchy
 - **Optional Objectives**: Support optional or side quests to make journeys feel layered without adding competitive gamification.
 
 ## Tech Stack
-QuestLog will be built with **Flutter** so the same codebase runs on both iOS and Android. We are experimenting with free map services such as Google Maps and Mapbox, but haven't committed to one yet. The app uses on-device AI models and may integrate with online services such as OpenAI if needed.
+QuestLog will be built with **Flutter** so the same codebase runs on both iOS and Android. The interactive map currently loads OpenStreetMap in a WebView using the `webview_flutter` package. The app relies on free services and may integrate with on-device AI models or online services such as OpenAI if needed.
 
 ## Philosophy
 QuestLog borrows the vocabulary of RPGs without turning life into a game. The goal is to encourage daily adventure and progress in real life, not to chase points or achievements.
