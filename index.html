@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuestLog</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+eKkTDUYdPFcQ8wO96A+5txn1zWQguL05yyOgZRro=" crossorigin=""/>
+<style>
+body { margin: 0; font-family: sans-serif; }
+#content { height: calc(100vh - 50px); overflow-y: auto; }
+nav { height: 50px; display: flex; border-top: 1px solid #ccc; }
+nav button { flex: 1; border: none; background: #f4f4f4; }
+.hidden { display: none; }
+#journal ul { list-style: none; padding: 0; }
+#journal li { padding: 5px 10px; }
+.completed { text-decoration: line-through; color: #777; }
+#map { height: 100%; }
+</style>
+</head>
+<body>
+<div id="content">
+<section id="journal">
+<h2>Quest Journal</h2>
+<form id="addForm">
+<input id="questText" placeholder="New quest" required>
+<input id="questLat" placeholder="Lat" size="7">
+<input id="questLng" placeholder="Lng" size="7">
+<select id="questType">
+<option value="major">Major</option>
+<option value="minor">Minor</option>
+</select>
+<button type="submit">Add</button>
+</form>
+<ul id="questList"></ul>
+</section>
+<section id="mapView" class="hidden">
+<div id="map"></div>
+</section>
+</div>
+<nav>
+<button id="journalTab">Journal</button>
+<button id="mapTab">Map</button>
+</nav>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-oA8U0qaRepBw5D8zl0stnP5/1dLUHUeD4/5x9It3r3I=" crossorigin=""></script>
+<script>
+const journalEl = document.getElementById('journal');
+const mapEl = document.getElementById('mapView');
+const listEl = document.getElementById('questList');
+const form = document.getElementById('addForm');
+let map, markers = [];
+
+function saveQuests(quests){
+  localStorage.setItem('quests', JSON.stringify(quests));
+}
+
+function loadQuests(){
+  return JSON.parse(localStorage.getItem('quests')||'[]');
+}
+
+function render(){
+  listEl.innerHTML='';
+  markers.forEach(m=>m.remove());
+  markers=[];
+  const quests = loadQuests();
+  quests.forEach((q,i)=>{
+    const li=document.createElement('li');
+    li.textContent=q.text;
+    if(q.done) li.classList.add('completed');
+    li.onclick=()=>{
+      q.done=!q.done;
+      saveQuests(quests);
+      render();
+    };
+    listEl.appendChild(li);
+    if(q.lat && q.lng){
+      const icon = L.icon({
+        iconUrl: q.type==='major' ? 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png'
+                                  : 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        iconSize:[25,41], iconAnchor:[12,41], popupAnchor:[0,-34]
+      });
+      const marker=L.marker([q.lat,q.lng],{icon}).addTo(map).bindPopup(q.text);
+      markers.push(marker);
+    }
+  });
+}
+
+form.onsubmit=e=>{
+  e.preventDefault();
+  const q={text:questText.value, lat:parseFloat(questLat.value), lng:parseFloat(questLng.value), type:questType.value};
+  const quests=loadQuests();
+  quests.push(q);
+  saveQuests(quests);
+  form.reset();
+  render();
+};
+
+function show(section){
+  journalEl.classList.add('hidden');
+  mapEl.classList.add('hidden');
+  section.classList.remove('hidden');
+  if(section===mapEl) map.invalidateSize();
+}
+
+document.getElementById('journalTab').onclick=()=>show(journalEl);
+document.getElementById('mapTab').onclick=()=>show(mapEl);
+
+map = L.map('map').setView([0,0],1);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+}).addTo(map);
+
+render();
+</script>
+</body>
+</html>
