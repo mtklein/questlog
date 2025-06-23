@@ -24,6 +24,7 @@ We do not yet have design assets or wireframes, so interface decisions rely on b
 
 ## Development
 Open `Package.swift` in Xcode. Xcode will generate a project automatically. Build and run on macOS or an iOS simulator. Quest data is saved to `quests.json` in your documents folder.
+If you are building from the command line, run `./deps.sh` to check for a Swift toolchain.
 
 ## Running on macOS
 1. Install Xcode from the Mac App Store.
