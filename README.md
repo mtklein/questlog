@@ -2,6 +2,8 @@
 
 QuestLog is a mobile application inspired by role-playing games. It blends a journal of quests with an interactive map to help users explore the real world with a sense of adventure.
 
+Quests currently have two levels: a high-level quest with a list of steps beneath it. This keeps things simple while still letting users break goals into meaningful tasks.
+
 ## MVP Goals
 - **Quest Journal**: Track ongoing and completed quests in a concise format. Support main quests and sub-quests.
 - **Interactive Map**: Display markers for significant locations such as shops, rest points, or user-defined points of interest. Markers link back to quests in the journal.
@@ -15,8 +17,10 @@ QuestLog is a mobile application inspired by role-playing games. It blends a jou
 - **Optional Objectives**: Support optional or side quests to make journeys feel layered without adding competitive gamification.
 
 ## Tech Stack
-QuestLog will be built with **Flutter** so the same codebase runs on both iOS and Android. The app will use on-device AI models and may integrate with online services such as OpenAI if needed.
+QuestLog will be built with **Flutter** so the same codebase runs on both iOS and Android. We are experimenting with free map services such as Google Maps and Mapbox, but haven't committed to one yet. The app uses on-device AI models and may integrate with online services such as OpenAI if needed.
 
 ## Philosophy
 QuestLog borrows the vocabulary of RPGs without turning life into a game. The goal is to encourage daily adventure and progress in real life, not to chase points or achievements.
+
+We do not yet have design assets or wireframes, so interface decisions rely on best judgement. The code is released under the MIT License.
 
