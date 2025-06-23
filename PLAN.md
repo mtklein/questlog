@@ -28,6 +28,8 @@
 - **Updated documentation**: README explains running the SwiftUI app and no longer references the previous approach.
 - Renamed package and files to drop the "SwiftUI" suffix and simplified the quest list to compile cleanly.
 - Added a helper script (`deps.sh`) to verify a Swift toolchain is available.
+- Refactored `QuestListView` into smaller functions so the Swift compiler can type-check it.
+- Improved `deps.sh` with checks for Xcode on macOS.
 
 ## Next Steps
 - Expand tests and refactor UI code as features grow.
