@@ -24,10 +24,10 @@
 - Simplified the README to focus on features and note that Android support is optional.
 - Added instructions in README for running the app on macOS.
 - Added a Swift Package manifest so Xcode opens the SwiftUI sample without creating a project manually.
-
+- **Migrated entirely to SwiftUI**: removed the Flutter demo and promoted the Swift package to the repository root.
+- **Ported features**: quest editing, JSON persistence and map markers are now implemented with SwiftUI and MapKit.
+- **Updated documentation**: README explains running the SwiftUI app and no longer mentions Flutter.
 
 ## Next Steps
 - Expand tests and refactor UI code as features grow.
 - Explore on-device AI for quest suggestions.
-- Reassess the technology stack: evaluate whether a native SwiftUI approach
-  for iOS and macOS would offer advantages over Flutter.
