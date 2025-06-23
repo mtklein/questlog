@@ -8,6 +8,7 @@
 - Updated setup script for Linux and macOS environments.
 - Configured Git to trust the installed Flutter directory to avoid dubious ownership warnings.
 - Pre-caches Flutter artifacts and runs `flutter pub get` so tests pass offline.
+- Fixed compilation errors in `main.dart` so the widget test runs successfully.
 
 
 ## Next Steps

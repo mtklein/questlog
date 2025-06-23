@@ -11,13 +11,13 @@ class QuestLogApp extends StatelessWidget {
     return MaterialApp(
       title: 'QuestLog Demo',
       theme: ThemeData(primarySwatch: Colors.indigo),
-      home: const QuestListScreen(),
+      home: QuestListScreen(),
     );
   }
 }
 
 class QuestListScreen extends StatelessWidget {
-  const QuestListScreen({Key? key}) : super(key: key);
+  QuestListScreen({Key? key}) : super(key: key);
 
   final List<Quest> quests = [
     Quest('Visit the Temple', [
