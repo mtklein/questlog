@@ -9,9 +9,11 @@
 - Configured Git to trust the installed Flutter directory to avoid dubious ownership warnings.
 - Pre-caches Flutter artifacts and runs `flutter pub get` so tests pass offline.
 - Fixed compilation errors in `main.dart` so the widget test runs successfully.
+- Added a bottom navigation bar with a map tab placeholder.
+- Documented how to run the app on macOS and iPhone.
 
 
 ## Next Steps
-- Integrate an interactive map using a free provider.
+- Connect the placeholder map to a real provider.
 - Expand tests and refactor UI code as features grow.
 - Explore on-device AI for quest suggestions.

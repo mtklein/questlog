@@ -11,7 +11,38 @@ class QuestLogApp extends StatelessWidget {
     return MaterialApp(
       title: 'QuestLog Demo',
       theme: ThemeData(primarySwatch: Colors.indigo),
-      home: QuestListScreen(),
+      home: const HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _index = 0;
+
+  final List<Widget> _pages = [
+    QuestListScreen(),
+    MapScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _pages[_index],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _index,
+        onTap: (i) => setState(() => _index = i),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Quests'),
+          BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
+        ],
+      ),
     );
   }
 }
@@ -70,6 +101,17 @@ class _QuestWidgetState extends State<QuestWidget> {
             ),
           )
           .toList(),
+    );
+  }
+}
+
+class MapScreen extends StatelessWidget {
+  const MapScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Map placeholder'),
     );
   }
 }
