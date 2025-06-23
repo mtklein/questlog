@@ -19,7 +19,7 @@ class QuestLogApp extends StatelessWidget {
 class QuestListScreen extends StatelessWidget {
   const QuestListScreen({Key? key}) : super(key: key);
 
-  final List<Quest> quests = const [
+  final List<Quest> quests = [
     Quest('Visit the Temple', [
       QuestStep('Buy tickets'),
       QuestStep('Take the train'),

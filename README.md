@@ -24,3 +24,6 @@ QuestLog borrows the vocabulary of RPGs without turning life into a game. The go
 
 We do not yet have design assets or wireframes, so interface decisions rely on best judgement. The code is released under the MIT License.
 
+## Development Setup
+Run `./deps.sh` to install Flutter locally, then use `flutter test` and `flutter run` to build the demo app.
+
