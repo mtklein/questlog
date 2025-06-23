@@ -8,23 +8,7 @@ struct QuestListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(store.quests.indices, id: .self) { index in
-                    let quest = store.quests[index]
-                    Section(header: header(for: quest, index: index)) {
-                        ForEach(quest.steps.indices, id: .self) { stepIndex in
-                            let step = quest.steps[stepIndex]
-                            Toggle(step.name, isOn: stepBinding(stepIndex, index))
-                        }
-                        .onDelete { offsets in
-                            store.quests[index].steps.remove(atOffsets: offsets)
-                            store.save()
-                        }
-                    }
-                }
-                .onDelete { indices in
-                    store.quests.remove(atOffsets: indices)
-                    store.save()
-                }
+                questSections
             }
             .navigationTitle("Quests")
             .toolbar {
@@ -41,6 +25,32 @@ struct QuestListView: View {
                     }
                     store.save()
                 }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var questSections: some View {
+        ForEach(store.quests.indices, id: .self) { index in
+            section(for: index)
+        }
+        .onDelete { indices in
+            store.quests.remove(atOffsets: indices)
+            store.save()
+        }
+    }
+
+    @ViewBuilder
+    private func section(for index: Int) -> some View {
+        let quest = store.quests[index]
+        Section(header: header(for: quest, index: index)) {
+            ForEach(quest.steps.indices, id: .self) { stepIndex in
+                let step = quest.steps[stepIndex]
+                Toggle(step.name, isOn: stepBinding(stepIndex, index))
+            }
+            .onDelete { offsets in
+                store.quests[index].steps.remove(atOffsets: offsets)
+                store.save()
             }
         }
     }
