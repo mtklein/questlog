@@ -27,3 +27,9 @@ We do not yet have design assets or wireframes, so interface decisions rely on b
 ## Development
 Run `source ./deps.sh` to fetch dependencies and run tests. A native version implemented with SwiftUI is available in the `swiftui` directory.
 
+
+## Running on macOS
+1. Install Xcode from the Mac App Store.
+2. Run `source ./deps.sh` to set up Flutter.
+3. Launch the app with `flutter run -d macos`.
+4. To try the SwiftUI sample, open the `swiftui` folder in Xcode and press Run.
