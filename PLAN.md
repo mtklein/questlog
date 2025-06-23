@@ -5,6 +5,9 @@
 - Clarified requirements: one-level quest hierarchy, free map providers, no design assets, MIT license.
 - Created minimal Flutter project with basic quest journal UI and tests.
 - Added a setup script to install Flutter for local development.
+- Updated setup script for Linux and macOS environments.
+- Configured Git to trust the installed Flutter directory to avoid dubious ownership warnings.
+- Pre-caches Flutter artifacts and runs `flutter pub get` so tests pass offline.
 
 
 ## Next Steps
